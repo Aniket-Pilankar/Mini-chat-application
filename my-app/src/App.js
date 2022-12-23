@@ -10,6 +10,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import SignIn from "./Components/SignIn";
 import ChatRoom from "./Components/ChatRoom";
+import SignOut from "./Components/SignOut";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB9K0CwMmZ0beo-ApOkoM8bt9a8xvKVYUE",
@@ -22,11 +23,11 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-console.log('app:', app)
-const auth = getAuth();
+console.log("app:", app);
+const auth = getAuth(app);
 console.log("auth:", auth);
 const db = getFirestore(app);
-console.log('db:', db)
+console.log("db:", db);
 
 // const auth = firebase.auth;
 // const firestore = firebase.firestore;
@@ -43,9 +44,17 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header"></header>
+      <header>
+        <h1>Chat</h1>
+        <SignOut />
+      </header>
+
       <section>
-        {user ? <ChatRoom /> : <SignIn signInWithGoogle={signInWithGoogle} />}
+        {user ? (
+          <ChatRoom app={app} />
+        ) : (
+          <SignIn signInWithGoogle={signInWithGoogle} />
+        )}
       </section>
     </div>
   );

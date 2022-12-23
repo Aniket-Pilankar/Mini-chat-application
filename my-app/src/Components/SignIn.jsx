@@ -4,6 +4,6 @@
 // const auth = firebase.auth;
 
 const SignIn = ({ signInWithGoogle }) => {
-  return <button onClick={signInWithGoogle}>Sign In with Google</button>;
+  return <button className="sign-in" onClick={signInWithGoogle}>Sign In with Google</button>;
 };
 export default SignIn;
